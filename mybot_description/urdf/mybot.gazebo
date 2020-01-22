@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<gazebo reference="chassis">
+ <material>Gazebo/Orange</material>
+</gazebo>
