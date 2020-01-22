@@ -29,8 +29,9 @@
 
 
 <macro name="box_inertia" params="m x y z">
-  <inertia  ixx="${m*(y*y+z*z)/12}" ixy="0" ixz="0" iyy="${m*(x*x+z*z)/12}" iyz="0" izz="${m*(x*x+z*z)/12}"/>
+  <inertia  ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 </macro>
+
 <link name="chassis">
  <collision>
 	<origin xyz="0 0 ${wheelRadius}" rpy="0 0 0" />
@@ -50,6 +51,7 @@
  <inertial>
 	<origin xyz="0 0 ${wheelRadius}" rpy="0 0 0" />
 	<mass value="${chassisMass}"/>
+	
 	<box_inertia m="${chassisMass}" x="${chassisLength}" y="${chassisWidth}" z="${chassisHeight}"/>
  </inertial>
 </link>

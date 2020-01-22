@@ -19,26 +19,26 @@
 
 
 <xacro:include filename="$(find mybot_description)/urdf/mybot.gazebo" /> <!--all the gazebo-specific aspects of our robot-->
-<!--<xacro:include filename="$(find mybot_description)/urdf/materials.xacro" />definition of the materials used (mostly colors)-->
-<!-- <xacro:include filename="$(find mybot_description)/urdf/macros.xacro" /> definitions of some macros for easier description of the robot -->
+<xacro:include filename="$(find mybot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find mybot_description)/urdf/macros.xacro" /> 
 
-<material name="orange">
- <color rgba="0.0 0.0 0.0 1.0"/>
-</material>
 
-<macro name="box_inertia" params="m x y z">
-	<mass value="${m}"/>
-	<inertia ixx="${m*(z*z+y*y)*0.083}" ixy="0" ixz="0" iyy="${m*(x*x+z*z)*0.083}" iyz="0" izz="{m*(x*x+y*y)*0.083}"  />
-</macro>
 
+
+
+<link name="footprint"/>
+
+<joint name="base_joint" type="fixed">
+	<parent link="footprint"/>
+	<child link="chassis"/>
+</joint>
 
 <link name="chassis">
- <collision>
-	<origin xyz="0 0 ${wheelRadius}" rpy="0 0 0" />
-	<geometry>
-		<box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/>
-	</geometry>
-	
+  <collision> 
+    <origin xyz="0 0 ${wheelRadius}" rpy="0 0 0"/> 
+    <geometry> 
+      <box size="${chassisLength} ${chassisWidth} ${chassisHeight}"/> 
+    </geometry> 
  </collision>
 
  <visual>
@@ -48,18 +48,13 @@
 	</geometry>
 	<material name="orange"/>
  </visual>
- <inertial>
+<inertial>
 	<origin xyz="0 0 ${wheelRadius}" rpy="0 0 0" />
 	<mass value="${chassisMass}"/>
-	<box_inertia m="${chassisMass}" x="{chassisLength}" y="${chassisWidth}" z="${chassisHeight}"/>
- </inertial>
+	<box_inertia m="${chassisMass}" x="${chassisLength}" y="${chassisWidth}" z="${chassisHeight}"/>
+</inertial>
 </link>
 
-<link name="footprint"/>
 
-<joint name="base_joint" type="fixed">
-	<parent link="footprint"/>
-	<child link="chassis"/>
-</joint>
 
 </robot>
